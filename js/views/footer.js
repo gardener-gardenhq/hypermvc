@@ -1,9 +1,8 @@
 
-import controller from '../controllers/todo';
 
 const selected = (hash, curr) => hash === curr ? 'selected' : '';
 
-export default (render, todos) => {
+export default (controller) => (render, todos) => {
 
 	const all = controller.todosSize();
 	const left = controller.todosLeft();

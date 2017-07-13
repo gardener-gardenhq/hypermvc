@@ -1,7 +1,5 @@
-import hyperHTML from '../lib/hyperhtml';
-import controller from '../controllers/todo';
 
-export default (render, todos) => render`
+export default (controller, hyperHTML) => (render, todos) => render`
 	<section class="main" style="${todos.length ? '' : 'display:none'}">
 		<input
 			class="toggle-all"
