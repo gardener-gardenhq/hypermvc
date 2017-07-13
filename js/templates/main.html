@@ -1,0 +1,32 @@
+<section class="main" style="${filteredItems.length ? '' : 'display:none'}">
+	<input
+		class="toggle-all"
+		type="checkbox"
+		onclick="${ dispatch('toggleAll') }"
+		checked="${filteredItems.every(item => item.completed)}">
+	<label for="toggle-all">Mark all as complete</label>
+	<ul class="todo-list">${filteredItems.map(item => fragment(item)`
+		<li
+			data-index="${items.indexOf(item)}"
+			class="${item.completed ? 'completed' : ''}"
+		>
+			<div class="view">
+				<input
+					class="toggle"
+					type="checkbox"
+					checked="${item.completed}"
+					onclick="${ dispatch('complete') }">
+				<label ondblclick="${ dispatch('edit') }">
+					${item.title}
+				</label>
+				<button class="destroy" onclick="${ dispatch('destroy')}"></button>
+			</div>
+			<input
+				class="edit"
+				value="${ item.title }"
+	            onblur="${ dispatch('save') }"
+				onkeypress="${ dispatch('input') }"
+				onkeydown="${ dispatch('reset.ESC_KEY') }">
+		</li>
+`)}</ul>
+</section>

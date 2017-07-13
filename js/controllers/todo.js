@@ -1,5 +1,6 @@
 
-export default (Todo) => {
+export default (Todo, win) => {
+    win = win || window;
     const controller = {
 
         ENTER_KEY: 13,
@@ -23,7 +24,7 @@ export default (Todo) => {
                 storage.set(this.items);
             };
 
-            window.onhashchange = this.update;
+            win.onhashchange = this.update;
         },
 
         // controller actions invoked through the DOM

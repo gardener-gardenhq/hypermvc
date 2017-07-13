@@ -1,0 +1,12 @@
+<footer class="footer" style="${canViewFooter ? '' : 'display:none'}">
+	<span class="todo-count">
+		<strong> ${ remaining } </strong> item${~-remaining ? 's' : ''} left
+	</span>
+	<ul class="filters">
+		<li><a class="${selected('all')}" href="#/">All</a></li>
+		<li><a class="${selected('active')}" href="#/active">Active</a></li>
+		<li><a class="${selected('completed')}" href="#/completed">Completed</a></li>
+	</ul>
+	<button class="clear-completed" onclick="${ dispatch('clear') }" style="${ canClearCompleted ? '' : 'display:none'}">Clear completed</button>
+</footer>
+

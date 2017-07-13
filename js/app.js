@@ -1,20 +1,31 @@
-
-
-module.exports = function(controller, storage, updateHeader, updateMain, updateFooter, hyperHTML, doc)
-{
-    doc = doc || document;
-    const appRender = hyperHTML.bind(doc.querySelector('.todoapp'));
-
-    const header = hyperHTML.wire();
-    const main = hyperHTML.wire();
-    const footer = hyperHTML.wire();
-
-    controller.init(storage, todos => {
-	    appRender`${[
-		    updateHeader(header, todos),
-		    updateMain(main, todos),
-		    updateFooter(footer, todos)
-	    ]}`;
-    });
+export default (controller, render, templates, storage) => {
+    const selected = (curr) => {
+        return controller.hash() === curr ? 'selected' : '';
+    }
+    controller.init(
+        storage,
+        todos => {
+	        render`${
+	            [].concat(
+	                templates.header.render(),
+		            templates.main.render(
+                        {
+                            items: controller.items,
+                            filteredItems: todos,
+                        }
+                    ),
+		            templates.footer.render(
+                        {
+                            selected: selected,
+                            canViewFooter: controller.todosSize() > 0,
+                            remaining: controller.todosLeft(),
+                            hash: controller.hash(),
+                            canClearCompleted: controller.todosLeft() < controller.todosSize()
+                        }
+                    )
+	            )
+	        }`;
+        }
+    );
     controller.update();
 }
