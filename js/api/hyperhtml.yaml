@@ -1,0 +1,15 @@
+# hyperhtml specific implementation of our api
+app.render:
+  callable: "./api/render"
+  arguments:
+    - "@hyperhtml"
+    - ".todoapp"
+app.template.api:
+  callable: "./api/template"
+  arguments:
+    - "@app.templates"
+    - "@app.dispatch"
+    - "@hyperhtml:wire"
+hyperhtml:
+  object: "hyperhtml/hyperhtml"
+  version: "0.11.7"
